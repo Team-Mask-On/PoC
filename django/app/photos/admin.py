@@ -4,4 +4,4 @@ from . import models
 
 @admin.register(models.Photo)
 class PhotoAdmin(admin.ModelAdmin):
-    list_display = ("captions", "photos")
+    pass
