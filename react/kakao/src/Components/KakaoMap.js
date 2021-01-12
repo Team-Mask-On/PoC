@@ -1,43 +1,51 @@
-import { Map, CustomOverlay } from 'react-kakao-maps'
-import { renderToString } from 'react-dom/server'
+import { Map } from 'react-kakao-maps'
 import React from 'react';
-import SensorOverlay from './SensorOverlay';
+import Sensor from './Sensor';
 
 const { kakao } = window;
 
-const place1 = renderToString(<SensorOverlay code={1} name={"스타벅스 충남대정문점 1"} addr={"대전광역시 유성구 궁동 460-12"}></SensorOverlay>)
-const place2 = renderToString(<SensorOverlay code={1} name={"우리집"} addr={"대전광역시 유성구 궁동 460-12"}></SensorOverlay>)
-
-class KakaoMap extends React.Component{
-    render() {
-        return(
-            <React.Fragment>
-                <Map options={{
-                    center: new kakao.maps.LatLng(36.360649863349586, 127.34453802638934),
-                    mapTypeId: kakao.maps.MapTypeId.ROADMAP,
-                    maxLevel: 5,
-                    minLevel: 2
-                }}>
-                    <CustomOverlay 
-                        options={{
-                            position: new kakao.maps.LatLng(36.360649863349586, 127.34453802638934),
-                            zIndex: 9999
-                        }}
-                        visible={true}
-                        children={<div dangerouslySetInnerHTML={{__html: place1}}></div>}
-                    ></CustomOverlay>
-                    <CustomOverlay 
-                        options={{
-                            position: new kakao.maps.LatLng(36.361297440075354, 127.34126868474307),
-                            zIndex: 9999
-                        }}
-                        visible={true}
-                        children={<div dangerouslySetInnerHTML={{__html: place2}}></div>}
-                    ></CustomOverlay>
-                </Map>
-            </React.Fragment>
-        );
-    }
+const KakaoMap = () => {
+    return(
+        <React.Fragment>
+            <Map options={{
+                center: new kakao.maps.LatLng(36.360649863349586, 127.34453802638934),
+                mapTypeId: kakao.maps.MapTypeId.ROADMAP,
+                maxLevel: 5,
+                minLevel: 2
+            }}>
+                <Sensor sensorInfo={{
+                    lat: 36.360649863349586,
+                    lng: 127.34453802638934,
+                    id: 1,
+                    name: '스타벅스',
+                    addr: '궁동 460-12',
+                    maxCount: 30,
+                    curCount: 30,
+                    maskCount: 30
+                }}></Sensor>
+                <Sensor sensorInfo={{
+                    lat: 36.36155681655039,
+                    lng: 127.34385159304685,
+                    id: 1,
+                    name: '투썸플레이스',
+                    addr: '궁동 460-12',
+                    maxCount: 30,
+                    curCount: 19,
+                    maskCount: 30
+                }}></Sensor>
+                <Sensor sensorInfo={{
+                    lat: 36.36187576302508, 
+                    lng: 127.34414005232662,
+                    id: 1,
+                    name: '이디야',
+                    addr: '궁동 460-12',
+                    maxCount: 30,
+                    curCount: 9,
+                    maskCount: 30
+                }}></Sensor>
+            </Map>
+        </React.Fragment>
+    );
 }
 
 export default KakaoMap;
