@@ -1,6 +1,7 @@
 import { Map } from 'react-kakao-maps'
 import React from 'react';
 import Sensor from './Sensor';
+import sensorData from '../Dummies/sensors.json';
 
 const { kakao } = window;
 
@@ -13,36 +14,19 @@ const KakaoMap = () => {
                 maxLevel: 5,
                 minLevel: 2
             }}>
-                <Sensor sensorInfo={{
-                    lat: 36.360649863349586,
-                    lng: 127.34453802638934,
-                    id: 1,
-                    name: '스타벅스',
-                    addr: '궁동 460-12',
-                    maxCount: 30,
-                    curCount: 30,
-                    maskCount: 30
-                }}></Sensor>
-                <Sensor sensorInfo={{
-                    lat: 36.36155681655039,
-                    lng: 127.34385159304685,
-                    id: 1,
-                    name: '투썸플레이스',
-                    addr: '궁동 460-12',
-                    maxCount: 30,
-                    curCount: 19,
-                    maskCount: 30
-                }}></Sensor>
-                <Sensor sensorInfo={{
-                    lat: 36.36187576302508, 
-                    lng: 127.34414005232662,
-                    id: 1,
-                    name: '이디야',
-                    addr: '궁동 460-12',
-                    maxCount: 30,
-                    curCount: 9,
-                    maskCount: 30
-                }}></Sensor>
+                {sensorData.data.sensors.map(sensor => {
+                    return <Sensor 
+                        key={sensor.id}
+                        sensorInfo={{
+                            lat: sensor.lat,
+                            lng: sensor.lng,
+                            name: sensor.name,
+                            desc: sensor.desc,
+                            addr: sensor.addr,
+                            maxCount: sensor.maxCount
+                        }}
+                    ></Sensor>
+                })}
             </Map>
         </React.Fragment>
     );
