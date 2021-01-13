@@ -14,7 +14,7 @@ const KakaoMap = () => {
                 maxLevel: 5,
                 minLevel: 2
             }}>
-                {sensorData.data.sensors.map(sensor => {
+                {sensorData.map(sensor => {
                     return <Sensor 
                         key={sensor.id}
                         sensorInfo={{
