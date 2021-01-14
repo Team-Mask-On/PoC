@@ -1,11 +1,10 @@
 import requests
+import json
 
 with open('./sample.jpeg', 'rb') as img:
     files = [
         ('send', img)
     ]
-    try:
-        requests.post("http://0.0.0.0:8000/photos/send", files=files)
-        print("이미지 전송 성공")
-    except:
-        print("이미지 전송 실패")
+    # http://pocdev.eba-gu27fjfe.ap-northeast-2.elasticbeanstalk.com
+    response = requests.post("http://pocdev.eba-gu27fjfe.ap-northeast-2.elasticbeanstalk.com/photos/send", files=files)
+    print(response.json())
